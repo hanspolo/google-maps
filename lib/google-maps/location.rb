@@ -3,13 +3,14 @@ require File.expand_path('../api', __FILE__)
 module Google
   module Maps
     class Location
-      attr_reader :address, :latitude, :longitude
+      attr_reader :address, :latitude, :longitude, :location_type
       alias :to_s :address
 
-      def initialize(address, latitude, longitude)
+      def initialize(address, latitude, longitude, location_type)
         @address = address
         @latitude = latitude
         @longitude = longitude
+        @location_type = location_type
       end
 
       def lat_lng
@@ -25,6 +26,7 @@ module Google
             result.formatted_address,
             result.geometry.location.lat,
             result.geometry.location.lng,
+            result.geometry.location_type
           )
         end
       end
